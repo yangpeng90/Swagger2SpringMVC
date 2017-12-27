@@ -54,7 +54,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
     	// 联系人
-    	Contact contact = new Contact("杨鹏", "https://www.yichangapp.com", "1187049350@qq.com");
+    	Contact contact = new Contact("yp", "https://www.yichangapp.com", "123456@qq.com");
     	
         return new ApiInfoBuilder()
         // API标题
