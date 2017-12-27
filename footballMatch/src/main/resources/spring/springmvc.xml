@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<!-- 加载数据库参数配置文件 -->
+	<context:property-placeholder location="classpath:secret.properties" />
+	
+	<!-- 注解驱动配置处理器映射器，和处理器适配器，自定义参数绑定，json交互等功能 -->
+	<mvc:annotation-driven>
+	</mvc:annotation-driven>
+	
+	<!-- 自定义参数绑定 这里做日期全局转换，也可以在bean的字段加@DateTimeFormat转换  conversion-service="conversionService"
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.yichangapp.utils.dateConverter.CustomDateConverter"/>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 组件扫描 -->
+	<context:component-scan base-package="com.yichangapp"/>
+	
+	<!-- 视图解析器  -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" /> -->
+	</bean>
+	
+	<!-- 配置全局异常处理器 就是自己实现的异常处理类
+	<bean class="change me!"></bean>-->
+	
+	<!-- 多部件类型解析器
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+		<!-- 上传文件的最大尺寸为5M 
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>-->
+	
+	<!-- swagger-ui的访问，因为是jar包的静态资源所以配置如下 -->
+	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+	
+</beans>

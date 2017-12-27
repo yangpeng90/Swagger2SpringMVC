@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yichangapp.mine.mapper.FollowedAttentionMapper" >
+  <resultMap id="BaseResultMap" type="com.yichangapp.po.userInfo.FollowedAttention" >
+    <result column="attentionId" property="attentionId" jdbcType="VARCHAR" />
+    <result column="followId" property="followId" jdbcType="VARCHAR" />
+    <result column="attentionTime" property="attentionTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yichangapp.po.userInfo.FollowedAttention" >
+    insert into followed_attention (attentionId, followId, attentionTime
+      )
+    values (#{attentionId,jdbcType=VARCHAR}, #{followId,jdbcType=VARCHAR}, #{attentionTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yichangapp.po.userInfo.FollowedAttention" >
+    insert into followed_attention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attentionId != null" >
+        attentionId,
+      </if>
+      <if test="followId != null" >
+        followId,
+      </if>
+      <if test="attentionTime != null" >
+        attentionTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attentionId != null" >
+        #{attentionId,jdbcType=VARCHAR},
+      </if>
+      <if test="followId != null" >
+        #{followId,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionTime != null" >
+        #{attentionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
